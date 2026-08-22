@@ -17,7 +17,7 @@ namespace MovieStore.Api.Locales
                 PropertyNameCaseInsensitive = true
             };
             _locales = new Dictionary<string, LocaleData>(StringComparer.OrdinalIgnoreCase);
-            foreach (var path in Directory.GetFiles(localesFolder + "*.json"))
+            foreach (var path in Directory.GetFiles(localesFolder, "*.json"))
             {
                 var json = File.ReadAllText(path);
                 var localeData = JsonSerializer.Deserialize<LocaleData>(json, jsonOptions);
