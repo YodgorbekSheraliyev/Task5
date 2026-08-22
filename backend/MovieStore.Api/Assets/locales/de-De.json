@@ -1,0 +1,19 @@
+{
+  "code": "de-DE",
+  "displayName": "German (Germany)",
+  "titleAdjectives": [ "Stiller", "Letzter", "Verlorener", "Goldener", "Wilder", "Dunkler", "Ewiger", "Vergessener" ],
+  "titleNouns": [ "Sturm", "Reise", "Geheimnis", "Horizont", "Erbe", "Königreich", "Schatten", "Traum" ],
+  "firstNames": [ "Hans", "Klaus", "Anna", "Petra", "Stefan", "Julia", "Thomas", "Sabine", "Michael", "Claudia" ],
+  "lastNames": [ "Müller", "Schmidt", "Schneider", "Fischer", "Weber", "Wagner", "Becker", "Hoffmann", "Koch", "Richter" ],
+  "genres": [ "Drama", "Komödie", "Action", "Thriller", "Abenteuer", "Dokumentation", "Romanze", "Horror", "Science-Fiction", "Krimi" ],
+  "reviewPhrases": [
+    "Eine fesselnde Geschichte von Anfang bis Ende.",
+    "Nicht das, was ich erwartet habe, aber positiv überrascht.",
+    "Tolle schauspielerische Leistung, schwache Handlung.",
+    "Einer der besten Filme, die ich dieses Jahr gesehen habe.",
+    "Etwas zu lang, aber sehenswert.",
+    "Allein die Kameraführung ist den Eintrittspreis wert.",
+    "Vorhersehbar, aber trotzdem unterhaltsam.",
+    "Ich konnte die ganze Zeit nicht wegschauen."
+  ]
+}

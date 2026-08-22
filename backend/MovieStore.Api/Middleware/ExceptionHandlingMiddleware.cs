@@ -1,4 +1,4 @@
-﻿namespace MovieStore.Api.Middlewares
+﻿namespace MovieStore.Api.Middleware
 {
     public class ExceptionHandlingMiddleware
     {

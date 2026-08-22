@@ -1,4 +1,11 @@
+using MovieStore.Api.Locales;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddSingleton<ILocaleProvider, LocaleProvider>();
+
+builder.Services.AddControllers();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
