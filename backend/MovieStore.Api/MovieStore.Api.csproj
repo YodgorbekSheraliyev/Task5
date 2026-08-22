@@ -7,9 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\locales\" />
+    <Content Remove="Assets\locales\de-De.json" />
+    <Content Remove="Assets\locales\en-Us.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="trailer-audio\" />
     <Folder Include="trailer-clips\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\locales\de-De.json" CopyToOutputDirectory="PreserveNewest">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\locales\en-Us.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

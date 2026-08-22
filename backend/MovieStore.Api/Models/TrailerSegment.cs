@@ -1,17 +1,6 @@
-﻿using MovieStore.Api.Models;
-
-namespace MovieStore.Api.Dtos
+﻿namespace MovieStore.Api.Models
 {
-    public class MovieDetailsDto
-    {
-        public List<ReviewDto> Reviews { get; set; } = new();
-        public TrailerSpecDto Trailer { get; set; } = new();
-    }
-    public class ReviewDto
-    {
-        public string Text { get; set; } = string.Empty;
-    }
-    public class TrailerSegmentDto
+    public class TrailerSegment
     {
         public string Type { get; set; } = string.Empty;
         public string Text { get; set; } = string.Empty;
