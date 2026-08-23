@@ -2,14 +2,15 @@ services:
   moviestore.api:
     image: moviestoreapi
     build:
-      context: ./backend/MovieStore.Api/
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backend/MovieStore.Api/Dockerfile
     ports:
       - "7080:8080"
       - "7081:8081"
     environment:
       TrailerClipPoolSize: 20
       ASPNETCORE_URLS: http://+:8080
+
   frontend:
     image: frontend
     build:
@@ -19,4 +20,3 @@ services:
       - "5172:5173"
     environment:
       VITE_API_URL: http://${SERVER_IP}:7080/api
-
