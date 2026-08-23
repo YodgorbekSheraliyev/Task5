@@ -1,10 +1,8 @@
 {
-  "code": "en-US",
+  "code": "en_US",
   "displayName": "English (USA)",
   "titleAdjectives": [ "Shadow", "Silent", "Broken", "Last", "Hidden", "Golden", "Wild", "Lost", "Endless", "Crimson" ],
   "titleNouns": [ "Journey", "Storm", "Secret", "Horizon", "Legacy", "Kingdom", "Voyage", "Rebellion", "Fortune", "Requiem" ],
-  "firstNames": [ "John", "Michael", "Sarah", "Emily", "James", "Jessica", "David", "Ashley", "Robert", "Amanda" ],
-  "lastNames": [ "Smith", "Johnson", "Williams", "Brown", "Jones", "Miller", "Davis", "Garcia", "Wilson", "Anderson" ],
   "genres": [ "Drama", "Comedy", "Action", "Thriller", "Adventure", "Documentary", "Romance", "Horror", "Sci-Fi", "Mystery" ],
   "reviewPhrases": [
     "A gripping story from start to finish.",

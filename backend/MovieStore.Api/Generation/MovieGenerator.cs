@@ -1,4 +1,5 @@
-﻿using MovieStore.Api.Locales;
+﻿using Bogus;
+using MovieStore.Api.Locales;
 using MovieStore.Api.Models;
 using MovieStore.Api.Rng;
 
@@ -8,24 +9,53 @@ namespace MovieStore.Api.Generation
     {
         private const int ActorCount = 3;
 
-        public Movie Generate(ulong seed, long index, LocaleData locale)
+        public Movie Generate(
+            ulong seed,
+            long index,
+            LocaleData locale)
         {
-            var random = new Random(SeedHelper.GetSeed(seed, index, RngCategory.Content));
+            var faker = new Faker(locale.Code);
 
-            var adjective = locale.TitleAdjectives[random.Next(locale.TitleAdjectives.Count)];
-            var noun = locale.TitleNouns[random.Next(locale.TitleNouns.Count)];
+            var fakerSeed = SeedHelper.GetSeed(
+                seed,
+                index,
+                RngCategory.Content
+            );
+
+            faker.Random = new Randomizer(
+                (int)(fakerSeed % int.MaxValue)
+            );
+
+            var adjective = faker.PickRandom(
+                locale.TitleAdjectives
+            );
+
+            var noun = faker.PickRandom(
+                locale.TitleNouns
+            );
+
             var title = $"{adjective} {noun}";
 
-            var actors = new List<string>();
-            for (int i = 0; i < ActorCount; i++)
-            {
-                var firstName = locale.FirstNames[random.Next(locale.FirstNames.Count)];
-                var lastName = locale.LastNames[random.Next(locale.LastNames.Count)];
-                actors.Add($"{firstName} {lastName}");
-            }
+            var actors = Enumerable
+                .Range(0, ActorCount)
+                .Select(_ =>
+                {
+                    var firstName = faker.Name.FirstName();
 
-            var year = random.Next(1980, 2027);
-            var genre = locale.Genres[random.Next(locale.Genres.Count)];
+                    var lastName = faker.Name.LastName();
+
+                    return $"{firstName} {lastName}";
+                })
+                .ToList();
+
+            var year = faker.Random.Int(
+                1980,
+                2026
+            );
+
+            var genre = faker.PickRandom(
+                locale.Genres
+            );
 
             return new Movie
             {

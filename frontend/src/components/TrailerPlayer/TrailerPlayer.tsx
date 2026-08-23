@@ -199,8 +199,9 @@ function VideoSegment({ segment, videoRef, onEnded }: VideoSegmentProps) {
         transform: `scale(${segment.zoom || 1})`,
       }}
       playsInline
-      muted
       onEnded={onEnded}
+      controls
+      
     />
   );
 }

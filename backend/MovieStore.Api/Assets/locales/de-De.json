@@ -1,10 +1,8 @@
 {
-  "code": "de-DE",
+  "code": "de",
   "displayName": "German (Germany)",
   "titleAdjectives": [ "Stiller", "Letzter", "Verlorener", "Goldener", "Wilder", "Dunkler", "Ewiger", "Vergessener" ],
   "titleNouns": [ "Sturm", "Reise", "Geheimnis", "Horizont", "Erbe", "Königreich", "Schatten", "Traum" ],
-  "firstNames": [ "Hans", "Klaus", "Anna", "Petra", "Stefan", "Julia", "Thomas", "Sabine", "Michael", "Claudia" ],
-  "lastNames": [ "Müller", "Schmidt", "Schneider", "Fischer", "Weber", "Wagner", "Becker", "Hoffmann", "Koch", "Richter" ],
   "genres": [ "Drama", "Komödie", "Action", "Thriller", "Abenteuer", "Dokumentation", "Romanze", "Horror", "Science-Fiction", "Krimi" ],
   "reviewPhrases": [
     "Eine fesselnde Geschichte von Anfang bis Ende.",

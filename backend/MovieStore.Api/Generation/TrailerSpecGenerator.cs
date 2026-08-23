@@ -59,10 +59,6 @@ namespace MovieStore.Api.Generation
 
             var segments = new List<TrailerSegment>();
 
-            // -------------------------------------------------
-            // 1. Movie title
-            // -------------------------------------------------
-
             segments.Add(new TrailerSegment
             {
                 Type = "title",
@@ -71,10 +67,6 @@ namespace MovieStore.Api.Generation
                     Pick(random, AnimationStyles),
                 Duration = 1.5
             });
-
-            // -------------------------------------------------
-            // 2. Localized filler phrase
-            // -------------------------------------------------
 
             if (locale.TrailerFillerPhrases.Count > 0)
             {
@@ -92,9 +84,6 @@ namespace MovieStore.Api.Generation
                 });
             }
 
-            // -------------------------------------------------
-            // 3. Video clips
-            // -------------------------------------------------
 
             int clipCount = random.Next(2, 4);
 
@@ -122,17 +111,12 @@ namespace MovieStore.Api.Generation
                 });
             }
 
-            // -------------------------------------------------
-            // 4. Transitions
-            // -------------------------------------------------
-
             for (int i = 0; i < segments.Count - 1; i++)
             {
                 segments[i].TransitionToNext =
                     Pick(random, Transitions);
             }
 
-            // Last segment has no next segment.
             if (segments.Count > 0)
             {
                 segments[^1].TransitionToNext = "none";

@@ -1,4 +1,5 @@
-﻿using MovieStore.Api.Locales;
+﻿using Bogus;
+using MovieStore.Api.Locales;
 using MovieStore.Api.Models;
 using MovieStore.Api.Rng;
 
@@ -11,11 +12,17 @@ namespace MovieStore.Api.Generation
             var random = new Random(SeedHelper.GetSeed(seed, index, RngCategory.Reviews));
             var reviews = new List<Review>();
 
+            var faker = new Faker(locale.Code);
+
+            faker.Random = new Randomizer(
+                (int)(random.Next() % int.MaxValue)
+            );
+
             for (int i = 0; i < count; i++)
             {
                 reviews.Add(new Review
                 {
-                    Text = locale.ReviewPhrases[random.Next(locale.ReviewPhrases.Count)]
+                    Text = faker.PickRandom(locale.ReviewPhrases)
                 });
             }
 
