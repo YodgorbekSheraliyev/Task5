@@ -9,7 +9,6 @@ export async function getLocales(): Promise<LocaleInfo[]> {
 
   const response = await fetch(`${API_URL}/locales`);
   console.log(response);
-  
 
   if (!response.ok) {
     throw new Error("Failed to load locales");
@@ -24,7 +23,6 @@ export async function getRandomSeed(): Promise<string> {
   if (!response.ok) {
     throw new Error("Failed to generate random seed");
   }
-console.log(fetch("http://localhost:5244/api/locales/").then(res => res.json()).then(d => console.log(d)))
   const seed = await response.json();
 
   return String(seed);
@@ -60,24 +58,22 @@ export async function getMovieDetails(
   index: number,
   seed: string,
   locale: string,
-  page: number,
-  pageSize: number,
   avgReviews: number,
 ): Promise<MovieDetails> {
   const params = new URLSearchParams({
     seed,
     locale,
-    page: String(page),
-    pageSize: String(pageSize),
-    avgReviews: String(avgReviews),
+    avgReviews: avgReviews.toString(),
   });
 
-  const response = await fetch(
-    `${API_URL}/movies/${index}/details?${params.toString()}`,
-  );
+  const response = await fetch(`${API_URL}/movies/${index}/details?${params}`);
 
   if (!response.ok) {
-    throw new Error("Failed to load movie details");
+    const errorText = await response.text();
+
+    throw new Error(
+      `Failed to load movie details: ${response.status} ${errorText}`,
+    );
   }
 
   return response.json();

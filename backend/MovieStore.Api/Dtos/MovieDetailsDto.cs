@@ -21,5 +21,6 @@ namespace MovieStore.Api.Dtos
         public double Zoom { get; set; }
         public double Speed { get; set; }
         public string TransitionToNext { get; set; } = string.Empty;
+        public double Duration { get; set; }
     }
 }

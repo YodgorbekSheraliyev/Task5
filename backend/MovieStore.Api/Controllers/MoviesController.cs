@@ -47,14 +47,12 @@ namespace MovieStore.Api.Controllers
                 return BadRequest($"Unknown locale: {locale}");
             }
 
-            ulong effectiveSeed = seed ^ (ulong)page * 1000003UL;
-
             var movies = Enumerable.Range(0, pageSize)
                 .Select(i =>
                 {
                     long index = (long)(page - 1) * pageSize + i + 1;
-                    var movie = _movieGenerator.Generate(effectiveSeed, index, localeData);
-                    var likes = _countGenerator.GenerateLikesCount(effectiveSeed, index, avgLikes);
+                    var movie = _movieGenerator.Generate(seed, index, localeData);
+                    var likes = _countGenerator.GenerateLikesCount(seed, index, avgLikes);
 
                     return new MovieSummaryDto
                     {

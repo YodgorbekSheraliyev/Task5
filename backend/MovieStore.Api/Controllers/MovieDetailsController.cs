@@ -34,46 +34,80 @@ namespace MovieStore.Api.Controllers
             long index,
             [FromQuery] ulong seed,
             [FromQuery] string locale,
-            [FromQuery] int page = 1,
-            [FromQuery] int pageSize = 10,
             [FromQuery] double avgReviews = 0)
         {
-            if (index < 1) return BadRequest("index must be >= 1");
-            if (avgReviews < 0 || avgReviews > 10) return BadRequest("avgReviews must be between 0 and 10");
+            if (index < 1)
+                return BadRequest("index must be >= 1");
+
+            if (avgReviews < 0 || avgReviews > 10)
+                return BadRequest(
+                    "avgReviews must be between 0 and 10");
 
             LocaleData localeData;
+
             try
             {
                 localeData = _localeProvider.GetLocale(locale);
             }
             catch (KeyNotFoundException)
             {
-                return BadRequest($"Unknown locale: {locale}");
+                return BadRequest(
+                    $"Unknown locale: {locale}");
             }
 
-            ulong effectiveSeed = seed ^ (ulong)page * 1000003UL;
+            var movie = _movieGenerator.Generate(
+                seed,
+                index,
+                localeData);
 
-            var movie = _movieGenerator.Generate(effectiveSeed, index, localeData);
-            var reviewCount = _countGenerator.GenerateReviewsCount(effectiveSeed, index, avgReviews);
-            var reviews = _reviewGenerator.Generate(effectiveSeed, index, localeData, reviewCount);
-            var trailer = _trailerSpecGenerator.Generate(effectiveSeed, index, localeData, movie.Title);
+            var reviewCount =
+                _countGenerator.GenerateReviewsCount(
+                    seed,
+                    index,
+                    avgReviews);
+
+            var reviews =
+                _reviewGenerator.Generate(
+                    seed,
+                    index,
+                    localeData,
+                    reviewCount);
+
+            var trailer =
+                _trailerSpecGenerator.Generate(
+                    seed,
+                    index,
+                    localeData,
+                    movie.Title);
 
             var result = new MovieDetailsDto
             {
-                Reviews = reviews.Select(r => new ReviewDto { Text = r.Text }).ToList(),
+                Reviews = reviews
+                    .Select(r => new ReviewDto
+                    {
+                        Text = r.Text
+                    })
+                    .ToList(),
+
                 Trailer = new TrailerSpecDto
                 {
-                    Segments = trailer.Segments.Select(s => new TrailerSegmentDto
-                    {
-                        Type = s.Type,
-                        Text = s.Text,
-                        AnimationStyle = s.AnimationStyle,
-                        ClipId = s.ClipId,
-                        ColorFilter = s.ColorFilter,
-                        Zoom = s.Zoom,
-                        Speed = s.Speed,
-                        TransitionToNext = s.TransitionToNext
-                    }).ToList()
+                    Segments = trailer.Segments
+                        .Select(s => new TrailerSegmentDto
+                        {
+                            Type = s.Type,
+                            Text = s.Text,
+                            AnimationStyle =
+                                s.AnimationStyle,
+                            ClipId = s.ClipId,
+                            ColorFilter =
+                                s.ColorFilter,
+                            Zoom = s.Zoom,
+                            Speed = s.Speed,
+                            TransitionToNext =
+                                s.TransitionToNext,
+                            Duration = s.Duration
+                        })
+                        .ToList()
                 }
             };
 

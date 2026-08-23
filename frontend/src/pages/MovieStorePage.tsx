@@ -140,7 +140,14 @@ export function MovieStorePage() {
 
         {!loading && !error && (
           <>
-            <MovieTable movies={movies} />
+            <MovieTable
+              movies={movies}
+              seed={settings.seed}
+              locale={settings.locale}
+              page={page}
+              pageSize={PAGE_SIZE}
+              avgReviews={settings.avgReviews}
+            />
 
             <Pagination
               page={page}

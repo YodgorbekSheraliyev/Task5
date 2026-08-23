@@ -1,43 +1,47 @@
-import type { Movie } from "../../models/Movie";
+import type { MovieSummary } from "../../models/MovieSummary";
+import { MovieRow } from "./MovieRow";
 
 interface MovieTableProps {
-    movies: Movie[];
+    movies: MovieSummary[];
+    seed: string;
+    locale: string;
+    avgReviews: number;
 }
 
-export function MovieTable({ movies }: MovieTableProps) {
+export function MovieTable({
+    movies,
+    seed,
+    locale,
+    avgReviews,
+}: MovieTableProps) {
     return (
         <div className="table-responsive">
-            <table className="table table-striped table-hover align-middle">
+            <table className="table table-hover align-middle">
+
                 <thead className="table-dark">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Actors</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Likes</th>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Actors</th>
+                        <th>Year</th>
+                        <th>Genre</th>
+                        <th>Likes</th>
+                        <th></th>
                     </tr>
                 </thead>
 
                 <tbody>
                     {movies.map((movie) => (
-                        <tr key={movie.index}>
-                            <td>{movie.index}</td>
-
-                            <td>{movie.title}</td>
-
-                            <td>
-                                {movie.actors.join(", ")}
-                            </td>
-
-                            <td>{movie.year}</td>
-
-                            <td>{movie.genre}</td>
-
-                            <td>{movie.likes}</td>
-                        </tr>
+                        <MovieRow
+                            key={movie.index}
+                            movie={movie}
+                            seed={seed}
+                            locale={locale}
+                            avgReviews={avgReviews}
+                        />
                     ))}
                 </tbody>
+
             </table>
         </div>
     );
