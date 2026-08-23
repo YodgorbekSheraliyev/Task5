@@ -3,9 +3,13 @@ import { MovieRow } from "./MovieRow";
 
 interface MovieTableProps {
     movies: MovieSummary[];
+
     seed: string;
     locale: string;
     avgReviews: number;
+
+    page: number;
+    pageSize: number;
 }
 
 export function MovieTable({

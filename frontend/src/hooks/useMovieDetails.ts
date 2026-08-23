@@ -24,7 +24,6 @@ export function useMovieDetails({
   const [error, setError] = useState<string | null>(null);
 
   const loadDetails = async (index: number) => {
-    // Don't request the same movie again.
     if (details[index]) {
       return;
     }

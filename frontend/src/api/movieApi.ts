@@ -63,14 +63,14 @@ export async function getMovieDetails(
   const params = new URLSearchParams({
     seed,
     locale,
-    avgReviews: avgReviews.toString(),
+    avgReviews: avgReviews?.toString(),
   });
 
   const response = await fetch(`${API_URL}/movies/${index}/details?${params}`);
 
   if (!response.ok) {
     const errorText = await response.text();
-
+    console.log("Ee" + errorText)
     throw new Error(
       `Failed to load movie details: ${response.status} ${errorText}`,
     );

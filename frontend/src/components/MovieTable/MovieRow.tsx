@@ -31,7 +31,6 @@ export function MovieRow({
         useState<string | null>(null);
 
     async function handleToggle() {
-        // Just collapse if already open.
         if (expanded) {
             setExpanded(false);
             return;
@@ -39,8 +38,6 @@ export function MovieRow({
 
         setExpanded(true);
 
-        // Don't request the details again
-        // if we already loaded them.
         if (details) {
             return;
         }
@@ -56,6 +53,8 @@ export function MovieRow({
                     locale,
                     avgReviews
                 );
+
+                console.log("DETAILS", result);
 
             setDetails(result);
         } catch (err) {

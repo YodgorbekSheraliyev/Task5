@@ -37,13 +37,11 @@ export function TrailerPlayer({ title, trailer }: TrailerPlayerProps) {
 
   const segment = trailer.segments[segmentIndex];
 
-  // Reset whenever a new trailer arrives.
   useEffect(() => {
     setSegmentIndex(0);
     setPlaying(false);
   }, [trailer]);
 
-  // Cleanup timer.
   useEffect(() => {
     return () => {
       if (timerRef.current !== null) {
@@ -52,7 +50,6 @@ export function TrailerPlayer({ title, trailer }: TrailerPlayerProps) {
     };
   }, []);
 
-  // Handle current segment.
   useEffect(() => {
     if (!playing || !segment) {
       return;

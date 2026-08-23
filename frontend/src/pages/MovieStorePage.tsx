@@ -10,6 +10,9 @@ import { useMovies } from "../hooks/useMovies";
 
 import type { GenerationSettings } from "../models/GenerationSettings";
 import type { LocaleInfo } from "../models/LocaleInfo";
+import { MovieGallery } from "../components/MovieGallery/MovieGallery";
+import type { ViewMode } from "../models/ViewMode";
+import { useInfiniteMovies } from "../hooks/useInfiniteMovies";
 
 const PAGE_SIZE = 10;
 
@@ -24,6 +27,18 @@ export function MovieStorePage() {
   });
 
   const [page, setPage] = useState(1);
+  const {
+    movies: galleryMovies,
+    loading: galleryLoading,
+    hasMore,
+    loadNextPage,
+  } = useInfiniteMovies({
+    seed: settings.seed,
+    locale: settings.locale,
+    pageSize: PAGE_SIZE,
+    avgLikes: settings.avgLikes,
+    avgReviews: settings.avgReviews,
+  });
 
   useEffect(() => {
     async function initialize() {
@@ -108,6 +123,7 @@ export function MovieStorePage() {
       avgReviews: value,
     }));
   };
+  const [viewMode, setViewMode] = useState<ViewMode>("table");
 
   const hasNextPage = movies.length === PAGE_SIZE;
 
@@ -121,6 +137,8 @@ export function MovieStorePage() {
         onLocaleChange={handleLocaleChange}
         onAvgLikesChange={handleAvgLikesChange}
         onAvgReviewsChange={handleAvgReviewsChange}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
       />
 
       <main className="container-fluid py-4">
@@ -140,20 +158,36 @@ export function MovieStorePage() {
 
         {!loading && !error && (
           <>
-            <MovieTable
-              movies={movies}
-              seed={settings.seed}
-              locale={settings.locale}
-              page={page}
-              pageSize={PAGE_SIZE}
-              avgReviews={settings.avgReviews}
-            />
+            {viewMode === "table" && (
+              <MovieTable
+                movies={movies}
+                seed={settings.seed}
+                locale={settings.locale}
+                page={page}
+                pageSize={PAGE_SIZE}
+                avgReviews={settings.avgReviews}
+              />
+            )}
 
-            <Pagination
-              page={page}
-              onPageChange={setPage}
-              hasNextPage={hasNextPage}
-            />
+            {viewMode === "gallery" && (
+              <MovieGallery
+                movies={galleryMovies}
+                loading={galleryLoading}
+                hasMore={hasMore}
+                onLoadMore={loadNextPage}
+                avgReviews={settings.avgReviews}
+                seed={settings.seed}
+                locale={settings.locale}
+              />
+            )}
+
+            {viewMode != "gallery" && (
+              <Pagination
+                page={page}
+                onPageChange={setPage}
+                hasNextPage={hasNextPage}
+              />
+            )}
           </>
         )}
       </main>
